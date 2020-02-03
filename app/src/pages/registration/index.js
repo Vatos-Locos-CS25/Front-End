@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react'
+import React, {useEffect, useState} from 'react'
 import axios from "axios"
 
 import { Formik } from "formik"
@@ -8,13 +8,20 @@ import RegistrationForm from "./RegistrationForm"
 
 const Registration = ({history}) => {
 
+    const [registered, setRegistered] = useState(false)
+
     useEffect(()=>{
-        const serializedToken = localStorage.getItem("mud_token")
-        const token = JSON.parse(serializedToken)
-        if (token && token.key){
-            history.push("/game")
+        if(registered){
+            const serializedToken = localStorage.getItem("mud_token")
+            const token = JSON.parse(serializedToken)
+            if (token && token.key){
+                history.push("/game")
+                setRegistered(false)
+            }
         }
-    })
+        
+    },[registered])
+    
     return (
         <div>
             <Formik initialValues={{username:"", email:"", password1: "", password2:""}} onSubmit={(values, actions) => {
@@ -22,6 +29,7 @@ const Registration = ({history}) => {
                 .then(response => {
                     const serializedToken = JSON.stringify(response.data)
                     localStorage.setItem("mud_token", serializedToken)
+                    setRegistered(true)
                     //console.log(response.data)
                 })
             }}

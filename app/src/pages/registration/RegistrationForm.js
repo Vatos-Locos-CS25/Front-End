@@ -23,6 +23,9 @@ import {
             padding: "0 20px",
             marginTop: theme.spacing(3)
         },
+        link: {
+            textAlign: "center"
+        }
       
   }))
 
@@ -46,7 +49,7 @@ const RegistrationForm = ({values, errors, touched, handleChange, handleSubmit, 
                                     required
                                     fullWidth
                                     id="username"
-                                    value={values.firstName}
+                                    value={values.username}
                                     onChange={handleChange}
                                     onBlur={handleBlur}
                                     label="Username"
@@ -94,6 +97,9 @@ const RegistrationForm = ({values, errors, touched, handleChange, handleSubmit, 
                             </Grid>
                             <Grid item xs={12}>
                                 <Button type="submit" fullWidth>Register</Button>
+                                <div className={classes.link}>
+                                    <Link href="/login">Already has an account ? Log In</Link>
+                                </div>
                             </Grid>
                         </Grid> 
                     </form>

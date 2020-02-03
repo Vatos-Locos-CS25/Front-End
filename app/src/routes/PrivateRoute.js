@@ -7,7 +7,7 @@ const PrivateRoute = ({component: Component, ...rest}) => {
 
     return (
         <Route {...rest} render={props => {
-            if (token.key) {
+            if (token && token.key) {
                 return <Component {...props}/>
             }
             return <Redirect to={"/registration"}/>

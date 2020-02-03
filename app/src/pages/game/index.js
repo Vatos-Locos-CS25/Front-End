@@ -2,9 +2,9 @@ import React from 'react'
 
 const Game = () => {
     return (
-        <div>
+        <section className="section--game-container">
             
-        </div>
+        </section>
     )
 }
 

@@ -11,9 +11,10 @@ const AppRouter = () => {
         <>
             <Router>
                 <Switch>
-
+    
                     <Route exact path="/" component={Home}/>
                     <Route exact path="/registration" component={Registration}/>
+                    <Route exact path="/login" component={LogIn}/>
                     <PrivateRoute exact path="/game" component={Game}/>
                     {/* Remove me when done, please */}
                     <Route exact path="/game-dev" component={Game}/>

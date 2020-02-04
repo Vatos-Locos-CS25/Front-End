@@ -1,6 +1,6 @@
 
 .section--map-container {
-    background-color: $darkland / 1.5%;
+    background-color: $ocean * 1.1%;
     height: 100%;
     position: relative;
     display: flex;
@@ -31,7 +31,7 @@
             color: $white / 2;
         }
         .icon-gamepad-key.inactive.big-lever {
-            color: $ocean;
+            color: $ocean / 2;
         }
     }
 }
@@ -48,6 +48,7 @@
     border-radius: 100px;
     .icon--char {
         font-size: 6rem;
+        color: $white;
     }
     .block--char-data {
         position: absolute;
@@ -78,12 +79,6 @@
         .icon--char-direct.west {
             left: 0;
         }
-    }
-    
-
-    
-    .block--avail-direct {
-
     }
 }
 

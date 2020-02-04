@@ -4,7 +4,7 @@ import GameNavBar from "../../components/navbar"
 import GameController from "../../components/controller"
 import { Grid } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import GameMapContainer from "./GameMapContainer";
+import GameMapContainer from "../../components/game/GameMapContainer";
   
 const useStyles = makeStyles(theme => ({
   gameControllerContainer: {

@@ -6,7 +6,7 @@ import * as Yup from "yup"
 import LogInForm from "./LogInForm"
 const Login = ({history}) => {
 
-    const request = process.env.NODE_ENV === "production" ? process.env.PRODUCTION_BASE_URL : "http://localhost:8000"
+    const request = process.env.NODE_ENV === "production" ? "https://wack-ass-game.herokuapp.com" : "http://localhost:8000"
     const [loggedIn, setLoggedIn] = useState(false)
 
     useEffect(()=>{

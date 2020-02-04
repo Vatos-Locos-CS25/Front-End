@@ -4,7 +4,10 @@
 
 
 // Vars and Mixins
-@import './global/_reset.scss';
+// @import './global/_reset.scss';
+body {
+    margin: 0;
+}
 @import './global/_variables.scss';
 @import "./global/_fonts.scss";
 @import './global/_global.scss';
@@ -12,10 +15,10 @@
 @import './global/_inputs.scss';
 @import './global/_mixins.scss';
 
-@import './global/_nprogress.scss';
-@import './global/_transitions.scss';
-@import "./global/_keyframes.scss";
-@import "./global/_animations.scss";
+// @import './global/_nprogress.scss';
+// @import './global/_transitions.scss';
+// @import "./global/_keyframes.scss";
+// @import "./global/_animations.scss";
 
 
 // Views and pages

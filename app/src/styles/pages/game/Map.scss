@@ -1,17 +1,35 @@
 
 .section--map-container {
-    background-color: $ocean;
+    background-color: $darkland / 1.5%;
     height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     .main--map-tiles {
         width: 320px;
         height: 320px;
         display: grid;
-        grid-template-columns: 100px 100px 100px;
-        grid-gap: 10px;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-gap: 5px;
         background-color: $darkland;
         padding: 10px;
     }
+    .block--game-controls {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        font-size: 3rem;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 10px;
+        .icon-gamepad-key {
+
+        }
+    }
 }
+
 
 [class*="block--tile"] {
     display: flex;
@@ -20,14 +38,25 @@
 }
 
 .block--tile_char {
-    background-color: red;
+    background-color: $grass;
     border-radius: 100px;
+    .icon--char {
+        font-size: 6rem;
+    }
+    .block--char-data {
+        position: absolute;
+        color: $darkland;
+    }
 }
 
 .block--tile_path {
-    background-color: $land;
+    background-color: $grass;
 }
 
 .block--tile_blocked {
-    background-color: $ocean;
+    background-color: $land;
+}
+.block--tile_corner {
+    background-color: $darkland;
+    color: $land;
 }

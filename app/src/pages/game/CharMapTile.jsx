@@ -1,4 +1,5 @@
 import React from 'react';
+import { GiGriffinSymbol } from "react-icons/gi";
 
 
 const CharMapTile = props => {
@@ -6,7 +7,8 @@ const CharMapTile = props => {
 
     return (
         <div className="block--tile_char">
-            hero rm {roomId}
+            <GiGriffinSymbol className="icon--char" /> 
+            <div className="block--char-data">{roomId}</div>
         </div>
     );
 };

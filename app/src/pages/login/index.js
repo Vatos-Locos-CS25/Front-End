@@ -3,44 +3,40 @@ import axios from "axios"
 
 import { Formik } from "formik"
 import * as Yup from "yup"
-
-import RegistrationForm from "./RegistrationForm"
-
-const Registration = ({history}) => {
+import LogInForm from "./LogInForm"
+const Login = ({history}) => {
 
     const request = process.env.NODE_ENV === "production" ? "https://wack-ass-game.herokuapp.com" : "http://localhost:8000"
-    const [registered, setRegistered] = useState(false)
+    const [loggedIn, setLoggedIn] = useState(false)
 
     useEffect(()=>{
-        if(registered){
+        if(loggedIn){
             const serializedToken = localStorage.getItem("mud_token")
             const token = JSON.parse(serializedToken)
             if (token && token.key){
                 history.push("/game")
-                setRegistered(false)
+                setLoggedIn(false)
             }
         }
         
-    },[registered, history])
-
+    },[loggedIn, history])
     return (
         <div>
-            <Formik initialValues={{username:"", email:"", password1: "", password2:""}} onSubmit={(values, actions) => {
-                
-                axios.post(`${request}/api/registration/`, values)
+            <Formik initialValues={{username:"", email:"", password: ""}} onSubmit={(values, actions) => {
+                axios.post(`${request}/api/login/`, values)
                 .then(response => {
                     const serializedToken = JSON.stringify(response.data)
                     localStorage.setItem("mud_token", serializedToken)
-                    setRegistered(true)
-                    
+                    setLoggedIn(true)
+                    //console.log(response.data)
                 })
             }}
             render={formikProps => (
-                <RegistrationForm {...formikProps}/>
+                <LogInForm {...formikProps}/>
             )}
             />
         </div>
     )
 }
 
-export default Registration
+export default Login

@@ -10,6 +10,9 @@ const AppRouter = () => {
                 <Switch>
                     <Route path="/registration" component={Registration}/>
                     <PrivateRoute path="/game" component={Game}/>
+                    {/* Remove me when done, please */}
+                    <Route path="/game-dev" component={Game}/>
+                    {/* ^^^ */}
                 </Switch>
             </Router>
         </>

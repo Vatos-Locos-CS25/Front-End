@@ -24,7 +24,7 @@ const Registration = ({history}) => {
     },[registered, history])
 
     return (
-        <div>
+        <div className="block--registration-login">
             <Formik initialValues={{username:"", email:"", password1: "", password2:""}} onSubmit={(values, actions) => {
                 
                 axios.post(`${request}/api/registration/`, values)

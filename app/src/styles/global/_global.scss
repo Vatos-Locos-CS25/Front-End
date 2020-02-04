@@ -7,11 +7,10 @@ html {
 }
 
 body {
-    background-color: $licorice;
-    // background-image: url("/static/max-saeling-tonal.jpg");
+    background-color: $white;
     background-position: bottom;
     background-attachment: fixed;
-    color: $isabelline;
+    color: $black;
     overflow: hidden;
     button:focus {
         outline: none;

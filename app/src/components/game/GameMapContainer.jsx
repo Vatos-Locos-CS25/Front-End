@@ -6,7 +6,7 @@ import MapTiles from "./MapTiles";
 
 const GameMapContainer = () => {
     const [ mapData, setMapData ] = useState(null);
-
+    
     const testToken = "e3db3b5598cd05d216894142accce241ec16b20d"
     
     useEffect(() => {
@@ -18,8 +18,8 @@ const GameMapContainer = () => {
         .then(response => setMapData(response.data))
         .catch(error=>console.log(error))
     }, [])
-    
-    console.log('this is your mapData pendejo --> ', mapData);
+
+    console.log('mapData --> ', mapData);
     return (
         <>
             <section className="section--map-container">

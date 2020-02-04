@@ -8,6 +8,7 @@ import RegistrationForm from "./RegistrationForm"
 
 const Registration = ({history}) => {
 
+    const request = process.env.NODE_ENV === "production" ? process.env.PRODUCTION_BASE_URL : "http://localhost:8000"
     const [registered, setRegistered] = useState(false)
 
     useEffect(()=>{
@@ -20,17 +21,18 @@ const Registration = ({history}) => {
             }
         }
         
-    },[registered])
-    
+    },[registered, history])
+
     return (
         <div>
             <Formik initialValues={{username:"", email:"", password1: "", password2:""}} onSubmit={(values, actions) => {
-                axios.post("http://localhost:8000/api/registration/", values)
+                
+                axios.post(`${request}/api/registration/`, values)
                 .then(response => {
                     const serializedToken = JSON.stringify(response.data)
                     localStorage.setItem("mud_token", serializedToken)
                     setRegistered(true)
-                    //console.log(response.data)
+                    
                 })
             }}
             render={formikProps => (

@@ -5,6 +5,8 @@ import { Formik } from "formik"
 import * as Yup from "yup"
 import LogInForm from "./LogInForm"
 const Login = ({history}) => {
+
+    const request = process.env.NODE_ENV === "production" ? process.env.PRODUCTION_BASE_URL : "http://localhost:8000"
     const [loggedIn, setLoggedIn] = useState(false)
 
     useEffect(()=>{
@@ -17,11 +19,11 @@ const Login = ({history}) => {
             }
         }
         
-    },[loggedIn])
+    },[loggedIn, history])
     return (
         <div>
             <Formik initialValues={{username:"", email:"", password: ""}} onSubmit={(values, actions) => {
-                axios.post("http://localhost:8000/api/login/", values)
+                axios.post(`${request}/api/login/`, values)
                 .then(response => {
                     const serializedToken = JSON.stringify(response.data)
                     localStorage.setItem("mud_token", serializedToken)

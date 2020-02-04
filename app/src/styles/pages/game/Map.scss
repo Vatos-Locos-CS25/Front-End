@@ -2,4 +2,32 @@
 .section--map-container {
     background-color: $ocean;
     height: 100%;
+    .main--map-tiles {
+        width: 320px;
+        height: 320px;
+        display: grid;
+        grid-template-columns: 100px 100px 100px;
+        grid-gap: 10px;
+        background-color: $darkland;
+        padding: 10px;
+    }
+}
+
+[class*="block--tile"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.block--tile_char {
+    background-color: red;
+    border-radius: 100px;
+}
+
+.block--tile_path {
+    background-color: $land;
+}
+
+.block--tile_blocked {
+    background-color: $ocean;
 }

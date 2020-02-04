@@ -1,11 +1,11 @@
 import React from 'react';
-import Map from "./Map";
+import GameMapContainer from "./GameMapContainer";
 
 const Game = () => {
     return (
         <section className="section--game-container">
             <div className="block--board">
-                <Map />
+                <GameMapContainer />
 
             </div>
         </section>

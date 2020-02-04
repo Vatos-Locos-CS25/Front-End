@@ -1,0 +1,103 @@
+
+.section--map-container {
+    background-color: $darkland / 1.5%;
+    height: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .main--map-tiles {
+        width: 320px;
+        height: 320px;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-gap: 5px;
+        background-color: $darkland;
+        padding: 10px;
+    }
+    .block--game-controls {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        font-size: 4.2rem;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 10px;
+        .icon-gamepad-key.active {
+            color: $white;
+        }
+        .icon-gamepad-key.inactive {
+            color: $white / 2;
+        }
+        .icon-gamepad-key.inactive.big-lever {
+            color: $ocean;
+        }
+    }
+}
+
+
+[class*="block--tile"] {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.block--tile_char {
+    background-color: $grass;
+    border-radius: 100px;
+    .icon--char {
+        font-size: 6rem;
+    }
+    .block--char-data {
+        position: absolute;
+        color: $darkland;
+    }
+    .block--char-direct-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        width: 120px;
+        height: 120px;
+        .icon--char-direct {
+            font-size: 3rem;
+            position: absolute;
+            display: block;
+            color: $grass / 1.5;
+        }
+        .icon--char-direct.north {
+            top: 0;
+        }
+        .icon--char-direct.east {
+            right: 0;
+        }
+        .icon--char-direct.south {
+            bottom: 0;
+        }
+        .icon--char-direct.west {
+            left: 0;
+        }
+    }
+    
+
+    
+    .block--avail-direct {
+
+    }
+}
+
+.block--tile_path {
+    background-color: $grass;
+}
+.block--tile_oldpath {
+    background-color: $grass / 2;
+}
+
+.block--tile_blocked {
+    background-color: $land;
+}
+.block--tile_corner {
+    background-color: $darkland;
+    color: $land;
+}

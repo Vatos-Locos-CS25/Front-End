@@ -4,15 +4,21 @@ import PrivateRoute from "./routes/PrivateRoute"
 import Registration from "./pages/registration"
 import LogIn from "./pages/login"
 import Game from "./pages/game"
+import Home from "./pages/Home"
+
 const AppRouter = () => {
     return (
         <>
             <Router>
                 <Switch>
-                    <Route path="/registration" component={Registration}/>
-                    <Route path="/login" component={LogIn}/>
-                    <PrivateRoute path="/game" component={Game}/>
-                    
+
+                    <Route exact path="/" component={Home}/>
+                    <Route exact path="/registration" component={Registration}/>
+                    <PrivateRoute exact path="/game" component={Game}/>
+                    {/* Remove me when done, please */}
+                    <Route exact path="/game-dev" component={Game}/>
+                    {/* ^^^ */}
+
                 </Switch>
             </Router>
         </>

@@ -4,7 +4,8 @@ import GameNavBar from "../../components/navbar"
 import GameController from "../../components/controller"
 import { Grid } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-
+import GameMapContainer from "./GameMapContainer";
+  
 const useStyles = makeStyles(theme => ({
   gameControllerContainer: {
     marginTop: "calc(5% + 60px)",
@@ -63,7 +64,12 @@ const Game = ({ history }) => {
             exitGame={handleExitGame}
           />
         </Grid>
-        {/*TODO: Game Board*/}
+          <section className="section--game-container">
+            <div className="block--board">
+                <GameMapContainer />
+
+            </div>
+          </section>
         <Grid>
           <div>Game Map</div>
         </Grid>

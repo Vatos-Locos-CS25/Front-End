@@ -1,33 +1,38 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { MdArrowForward, MdArrowBack, MdArrowUpward, MdArrowDownward } from "react-icons/md";
 
 import CharMapTile from "./CharMapTile";
 import SurroundingMapTile from "./SurroundingMapTile";
+import Controls from "./Controls";
 
 
 const MapTiles = props => {
-    const { mapData, charData } = props;
+    const { mapData } = props;
     
-    const [ mapLandState, setMapLandState ] = useState({
-        currentRoomId: 100,
-    })
+    const [ mapLandState, setMapLandState ] = useState({ currentRoomId: 20 })
 
     // Holds the possible directions a player can go
     const [ possDirect, setPossDirect ] = useState({
         nextTile: {
             north: false,
-            south: true,
+            south: false,
             east: false,
             west: false,
-            room_id: 0,
+            room_id: 21,
         },
         prevTile: {
             north: false,
             south: false,
-            east: true,
+            east: false,
             west: false,
-            room_id: 0,
+            room_id: 19,
+        },
+        currentTile: {
+            north: false,
+            south: false,
+            east: false,
+            west: false,
+            room_id: 20,
         }
     })
 
@@ -36,66 +41,81 @@ const MapTiles = props => {
         // If position is 11, then it places map tile 10 and 12
         // Pulls in possible directions from filtering mapData
         // Sets the possDirect hook with complete room objects
-        let roomIdNext = currentRoom + 1
-        let roomIdPrev = currentRoom - 1
-        let nextRoom = mapData.filter(room => room.room_id === roomIdNext)
-        let prevRoom = mapData.filter(room => room.room_id === roomIdPrev)
+        let nextRoom = mapData.filter(room => room.room_id === (currentRoom + 1))
+        let prevRoom = mapData.filter(room => room.room_id === (currentRoom - 1))
+        let currRoom = mapData.filter(room => room.room_id === currentRoom)
 
         setPossDirect({
             ...possDirect,
-            nextTile: {
-                ...nextRoom[0]
-            },
-            prevTile: {
-                ...prevRoom[0]
-            }
+            nextTile: { ...nextRoom[0] },
+            prevTile: { ...prevRoom[0] },
+            currentTile: { ...currRoom[0] },
         })
-        console.log('possDirect --> ', possDirect);
+        
     }
 
-    const moveChar = direction => {
-        direction === "up" && console.log(direction)
-    }
+    const moveChar = (directClicked, possDirect) => {
+        if (directClicked === "north" && possDirect.nextTile.north) setMapLandState({currentRoomId: possDirect.nextTile.room_id })
+        if (directClicked === "south" && possDirect.nextTile.south) setMapLandState({currentRoomId: possDirect.nextTile.room_id })
+        if (directClicked === "east" && possDirect.nextTile.east) setMapLandState({currentRoomId: possDirect.nextTile.room_id })
+        if (directClicked === "west" && possDirect.nextTile.west) setMapLandState({currentRoomId: possDirect.nextTile.room_id })
 
+        if (directClicked === "forward") setMapLandState({currentRoomId: possDirect.currentTile.room_id + 1 })
+        if (directClicked === "backward") setMapLandState({currentRoomId: possDirect.currentTile.room_id - 1 })
+
+        // if (directClicked === "north" && possDirect.prevTile.north) setMapLandState({currentRoomId: possDirect.prevTile.room_id })
+        // if (directClicked === "south" && possDirect.prevTile.south) setMapLandState({currentRoomId: possDirect.prevTile.room_id })
+        // if (directClicked === "east" && possDirect.prevTile.east) setMapLandState({currentRoomId: possDirect.prevTile.room_id })
+        // if (directClicked === "west" && possDirect.prevTile.west) setMapLandState({currentRoomId: possDirect.prevTile.room_id })
+    };
 
     useEffect(() => {
-        setMapLandState({ ...mapLandState, currentRoomId: charData.room_id })
-        createMapTiles(charData.room_id)
+        setMapLandState({ ...mapLandState })
+        createMapTiles(mapLandState.currentRoomId)
+    }, [ mapLandState.currentRoomId, setPossDirect ])
+    
+    console.log('possDirect --> ', possDirect);
+    console.log('mapLandState --> ', mapLandState);
 
-    }, [mapLandState.currentRoomId])
-
-
+    // Todo: programatically generate tiles
     return (
         <>
             <main className="main--map-tiles">
-                <SurroundingMapTile next={false} possDirect={"corner"} />
-                <SurroundingMapTile next={possDirect.nextTile.north} prev={possDirect.prevTile.north} possDirect={possDirect}  />
-                <SurroundingMapTile next={false} possDirect={"corner"} />
-                <SurroundingMapTile next={possDirect.nextTile.west} prev={possDirect.prevTile.west} possDirect={possDirect} />
-                <CharMapTile  roomId={mapLandState.currentRoomId} />
-                <SurroundingMapTile next={possDirect.nextTile.east} prev={possDirect.prevTile.east} possDirect={possDirect} />
-                <SurroundingMapTile next={false} possDirect={"corner"} />
-                <SurroundingMapTile next={possDirect.nextTile.south} prev={possDirect.prevTile.south} possDirect={possDirect} />
-                <SurroundingMapTile next={false} possDirect={"corner"} />
+                <SurroundingMapTile next={false} prev={false}   possDirect={"corner"} />
+
+                <SurroundingMapTile 
+                    next={possDirect.currentTile.north} 
+                    prev={possDirect.currentTile.north} 
+                    possDirect={possDirect}  
+                />
+
+                <SurroundingMapTile next={false} prev={false}   possDirect={"corner"} />
+
+                <SurroundingMapTile 
+                    next={possDirect.currentTile.west} 
+                    prev={possDirect.currentTile.west} 
+                    possDirect={possDirect} 
+                />
+
+                <CharMapTile  roomId={mapLandState.currentRoomId} possDirect={possDirect} />
+
+                <SurroundingMapTile 
+                    next={possDirect.currentTile.east}
+                    prev={possDirect.currentTile.east} 
+                    possDirect={possDirect} 
+                />
+
+                <SurroundingMapTile next={false} prev={false}   possDirect={"corner"} />
+
+                <SurroundingMapTile 
+                    next={possDirect.currentTile.south} 
+                    prev={possDirect.currentTile.south} 
+                    possDirect={possDirect} 
+                />
+
+                <SurroundingMapTile next={false} prev={false}   possDirect={"corner"} />
             </main>
-            <div className="block--game-controls">
-                <MdArrowBack 
-                    className="icon-gamepad-key"
-                    onClick={() => moveChar("left")}
-                />
-                <MdArrowUpward 
-                    className="icon-gamepad-key"
-                    onClick={() => moveChar("up")}
-                />
-                <MdArrowDownward 
-                    className="icon-gamepad-key"
-                    onClick={() => moveChar("down")}
-                />
-                <MdArrowForward 
-                    className="icon-gamepad-key"
-                    onClick={() => moveChar("right")}
-                />
-            </div>
+            <Controls possDirect={possDirect} moveChar={moveChar} />
         </>
     );
 };

@@ -20,12 +20,18 @@
         position: absolute;
         left: 0;
         bottom: 0;
-        font-size: 3rem;
+        font-size: 4.2rem;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
         grid-gap: 10px;
-        .icon-gamepad-key {
-
+        .icon-gamepad-key.active {
+            color: $white;
+        }
+        .icon-gamepad-key.inactive {
+            color: $white / 2;
+        }
+        .icon-gamepad-key.inactive.big-lever {
+            color: $ocean;
         }
     }
 }
@@ -47,10 +53,45 @@
         position: absolute;
         color: $darkland;
     }
+    .block--char-direct-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        width: 120px;
+        height: 120px;
+        .icon--char-direct {
+            font-size: 3rem;
+            position: absolute;
+            display: block;
+            color: $grass / 1.5;
+        }
+        .icon--char-direct.north {
+            top: 0;
+        }
+        .icon--char-direct.east {
+            right: 0;
+        }
+        .icon--char-direct.south {
+            bottom: 0;
+        }
+        .icon--char-direct.west {
+            left: 0;
+        }
+    }
+    
+
+    
+    .block--avail-direct {
+
+    }
 }
 
 .block--tile_path {
     background-color: $grass;
+}
+.block--tile_oldpath {
+    background-color: $grass / 2;
 }
 
 .block--tile_blocked {

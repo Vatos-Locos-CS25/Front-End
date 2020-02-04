@@ -6,9 +6,7 @@ import MapTiles from "./MapTiles";
 
 const GameMapContainer = () => {
     const [ mapData, setMapData ] = useState(null);
-    const [ charData, setCharData ] = useState({
-        room_id: 11
-    })
+
     const testToken = "e3db3b5598cd05d216894142accce241ec16b20d"
     
     useEffect(() => {
@@ -25,8 +23,8 @@ const GameMapContainer = () => {
     return (
         <>
             <section className="section--map-container">
-                {mapData && charData ? (
-                    <MapTiles mapData={mapData} charData={charData} />
+                {mapData ? (
+                    <MapTiles mapData={mapData} />
                 ) : null}
             </section>
         </>

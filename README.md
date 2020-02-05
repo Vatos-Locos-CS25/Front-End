@@ -1,7 +1,6 @@
 # Lambda mud front end
 
-> POST `https://lambda-mud-512.herokuapp.com/api/login/`
-
-> POST `https://lambda-mud-512.herokuapp.com/api/register/`
+> POST `https://whack-ass-game.herokuapp.com/api/login/`\
+> POST `https://whack-ass-game.herokuapp.com/api/register/`
 
 

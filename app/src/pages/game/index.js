@@ -71,6 +71,7 @@ const Game = ({ history }) => {
             exitGame={handleExitGame}
           />
         </Grid>
+
         <Grid item xs={12}>
           <Box className={classes.playerLocationDisplay}>
             <div style={{ flex: 1 }}>You are in Room 1</div>

@@ -19,6 +19,12 @@ body {
 // @import "./global/_keyframes.scss";
 // @import "./global/_animations.scss";
 
+
+// Loader
+@import "./components/react-loading-spinner/Loading.scss";
+@import "./components/react-loading-spinner/react-spinner-loader.css";
+
+
 // Views and pages
 @import "./App.scss";
 

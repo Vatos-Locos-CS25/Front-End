@@ -3,11 +3,12 @@ import axios from "axios";
 import { useEffect, useState } from 'react';
 
 import MapTiles from "./MapTiles";
+import Loading from "../Loading";
 
 const GameMapContainer = () => {
     const [ mapData, setMapData ] = useState(null);
     
-    const testToken = "e3db3b5598cd05d216894142accce241ec16b20d"
+    const testToken = "509bba415bd1211a1d65261cd86076c1c0581a5a"
     
     useEffect(() => {
         axios({
@@ -20,14 +21,15 @@ const GameMapContainer = () => {
     }, [])
 
     console.log('mapData --> ', mapData);
+    // If there is mapData, render the maptiles
     return (
-        <>
-            <section className="section--map-container">
-                {mapData ? (
-                    <MapTiles mapData={mapData} />
-                ) : null}
-            </section>
-        </>
+        <section className="section--map-container">
+            {mapData ? (
+                <MapTiles mapData={mapData} />
+            ) : (
+                <Loading />
+            )}
+        </section>
     );
 };
 

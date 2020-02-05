@@ -45,28 +45,21 @@ const MapTiles = props => {
         let prevRoom = mapData.filter(room => room.room_id === (currentRoom - 1))
         let currRoom = mapData.filter(room => room.room_id === currentRoom)
 
+        
+
         setPossDirect({
             ...possDirect,
             nextTile: { ...nextRoom[0] },
             prevTile: { ...prevRoom[0] },
             currentTile: { ...currRoom[0] },
         })
-        
     }
 
-    const moveChar = (directClicked, possDirect) => {
-        if (directClicked === "north" && possDirect.nextTile.north) setMapLandState({currentRoomId: possDirect.nextTile.room_id })
-        if (directClicked === "south" && possDirect.nextTile.south) setMapLandState({currentRoomId: possDirect.nextTile.room_id })
-        if (directClicked === "east" && possDirect.nextTile.east) setMapLandState({currentRoomId: possDirect.nextTile.room_id })
-        if (directClicked === "west" && possDirect.nextTile.west) setMapLandState({currentRoomId: possDirect.nextTile.room_id })
-
-        if (directClicked === "forward") setMapLandState({currentRoomId: possDirect.currentTile.room_id + 1 })
-        if (directClicked === "backward") setMapLandState({currentRoomId: possDirect.currentTile.room_id - 1 })
-
-        // if (directClicked === "north" && possDirect.prevTile.north) setMapLandState({currentRoomId: possDirect.prevTile.room_id })
-        // if (directClicked === "south" && possDirect.prevTile.south) setMapLandState({currentRoomId: possDirect.prevTile.room_id })
-        // if (directClicked === "east" && possDirect.prevTile.east) setMapLandState({currentRoomId: possDirect.prevTile.room_id })
-        // if (directClicked === "west" && possDirect.prevTile.west) setMapLandState({currentRoomId: possDirect.prevTile.room_id })
+    const moveChar = (directClicked) => {
+        if (directClicked === "north" && possDirect.currentTile.next_room_id_n !== 0) setMapLandState({ currentRoomId: possDirect.currentTile.next_room_id_n })
+        if (directClicked === "south" && possDirect.currentTile.next_room_id_s !== 0) setMapLandState({ currentRoomId: possDirect.currentTile.next_room_id_s })
+        if (directClicked === "east" && possDirect.currentTile.next_room_id_e !== 0) setMapLandState({ currentRoomId: possDirect.currentTile.next_room_id_e })
+        if (directClicked === "west" && possDirect.currentTile.next_room_id_w !== 0) setMapLandState({ currentRoomId: possDirect.currentTile.next_room_id_w })
     };
 
     useEffect(() => {
@@ -81,41 +74,33 @@ const MapTiles = props => {
     return (
         <>
             <main className="main--map-tiles">
-                <SurroundingMapTile next={false} prev={false}   possDirect={"corner"} />
+                <SurroundingMapTile  possDirect={"corner"} />
 
                 <SurroundingMapTile 
-                    next={possDirect.currentTile.north} 
-                    prev={possDirect.currentTile.north} 
-                    possDirect={possDirect}  
+                    possDirect={possDirect.currentTile.next_room_id_n}  
                 />
 
-                <SurroundingMapTile next={false} prev={false}   possDirect={"corner"} />
+                <SurroundingMapTile  possDirect={"corner"} />
 
                 <SurroundingMapTile 
-                    next={possDirect.currentTile.west} 
-                    prev={possDirect.currentTile.west} 
-                    possDirect={possDirect} 
+                    possDirect={possDirect.currentTile.next_room_id_w} 
                 />
 
-                <CharMapTile  roomId={mapLandState.currentRoomId} possDirect={possDirect} />
+                <CharMapTile  roomId={mapLandState.currentRoomId}  possDirect={possDirect} />
 
                 <SurroundingMapTile 
-                    next={possDirect.currentTile.east}
-                    prev={possDirect.currentTile.east} 
-                    possDirect={possDirect} 
+                    possDirect={possDirect.currentTile.next_room_id_e} 
                 />
 
-                <SurroundingMapTile next={false} prev={false}   possDirect={"corner"} />
+                <SurroundingMapTile  possDirect={"corner"} />
 
                 <SurroundingMapTile 
-                    next={possDirect.currentTile.south} 
-                    prev={possDirect.currentTile.south} 
-                    possDirect={possDirect} 
+                    possDirect={possDirect.currentTile.next_room_id_s} 
                 />
 
-                <SurroundingMapTile next={false} prev={false}   possDirect={"corner"} />
+                <SurroundingMapTile  possDirect={"corner"} />
             </main>
-            <Controls possDirect={possDirect} moveChar={moveChar} />
+            <Controls currentTile={possDirect.currentTile}  possDirect={possDirect}  moveChar={moveChar} />
         </>
     );
 };

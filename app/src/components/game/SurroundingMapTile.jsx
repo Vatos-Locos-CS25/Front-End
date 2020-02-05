@@ -2,7 +2,8 @@ import React from 'react';
 
 
 const SurroundingMapTile = props => {
-    const { next, prev, possDirect } = props;
+    const { possDirect } = props;
+    console.log('possDirect --> ', possDirect);
 
     if (possDirect === "corner") {
         return (
@@ -10,16 +11,10 @@ const SurroundingMapTile = props => {
         )
     }
     
-
     return (
         <>
-            {next ? (
-                <div className="block--tile_path">
-                </div>
-            ) : 
-            prev ? (
-                <div className="block--tile_oldpath">
-                </div>
+            {possDirect  !== 0  ?  (
+                <div className="block--tile_path"></div>
             ) : (
                 <div className="block--tile_blocked"></div>
             )}

@@ -64,15 +64,13 @@ const Game = ({ history }) => {
             exitGame={handleExitGame}
           />
         </Grid>
-          <section className="section--game-container">
-            <div className="block--board">
-                <GameMapContainer />
 
-            </div>
+        <section className="section--game-container">
+          <section className="block--board">
+              <GameMapContainer />
           </section>
-        <Grid>
-          <div>Game Map</div>
-        </Grid>
+        </section>
+        
         <Grid item xs={12}>
           <GameController
             up={handleUpDirection}

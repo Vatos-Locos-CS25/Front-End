@@ -4,43 +4,43 @@ import { MdArrowForward, MdArrowBack, MdArrowUpward, MdArrowDownward, MdArrowDro
 
 
 const Controls = props => {
-    const { possDirect, moveChar } = props;
+    const { currentTile, possDirect, moveChar } = props;
 
 
     
 
-    useEffect(() => {
+    // useEffect(() => {
         
-    }, [possDirect])
+    // }, [possDirect])
 
 
     return (
         <div className="block--game-controls">
-            <MdArrowDropUp 
-                className={`icon-gamepad-key big-lever ${possDirect.nextTile.south || possDirect.prevTile.south ? "active" : "inactive"}`}
-                onClick={() => moveChar("forward", possDirect)}
+            {/* <MdArrowDropUp 
+                // className={`icon-gamepad-key big-lever ${possDirect.nextTile.south || possDirect.prevTile.south ? "active" : "inactive"}`}
+                onClick={() => moveChar("forward")}
             />
             <MdArrowDropDown 
-                className={`icon-gamepad-key big-lever ${possDirect.nextTile.south || possDirect.prevTile.south ? "active" : "inactive"}`}
-                onClick={() => moveChar("backward", possDirect)}
-            />
+                // className={`icon-gamepad-key big-lever ${possDirect.nextTile.south || possDirect.prevTile.south ? "active" : "inactive"}`}
+                onClick={() => moveChar("backward")}
+            /> */}
 
-            {/* <MdArrowBack 
-                className={`icon-gamepad-key ${possDirect.nextTile.west || possDirect.prevTile.west ? "active" : "inactive"}`}
-                onClick={() => moveChar("west", possDirect)}
+            <MdArrowBack 
+                className={`icon-gamepad-key ${currentTile.next_room_id_w !== 0 ? "active" : "inactive"}`}
+                onClick={() => moveChar("west")}
             />
             <MdArrowForward 
-                className={`icon-gamepad-key ${possDirect.nextTile.east || possDirect.prevTile.east ? "active" : "inactive"}`}
-                onClick={() => moveChar("east", possDirect)}
+                className={`icon-gamepad-key ${currentTile.next_room_id_w !== 0 ?  "active" : "inactive"}`}
+                onClick={() => moveChar("east")}
             />
             <MdArrowUpward 
-                className={`icon-gamepad-key ${possDirect.nextTile.north || possDirect.prevTile.north ? "active" : "inactive"}`}
-                onClick={() => moveChar("north", possDirect)}
+                className={`icon-gamepad-key ${currentTile.next_room_id_w !== 0 ?  "active" : "inactive"}`}
+                onClick={() => moveChar("north")}
             />
             <MdArrowDownward 
-                className={`icon-gamepad-key ${possDirect.nextTile.south || possDirect.prevTile.south ? "active" : "inactive"}`}
-                onClick={() => moveChar("south", possDirect)}
-            /> */}
+                className={`icon-gamepad-key ${currentTile.next_room_id_w !== 0 ?  "active" : "inactive"}`}
+                onClick={() => moveChar("south")}
+            />
         </div>
     );
 }

@@ -36,7 +36,7 @@ const useStyles = makeStyles(theme => ({
     color: "#FFFFFF"
   }
 }))
-const GameController = ({ up, left, right, down, speak }) => {
+const GameController = ({ currentTile, moveChar, speak }) => {
   const classes = useStyles()
   return (
     <AppBar position="fixed" className={classes.controller}>
@@ -47,7 +47,10 @@ const GameController = ({ up, left, right, down, speak }) => {
               display: "flex",
               flexDirection: "column"
             }}>
-            <Button className={classes.upDownButton} onClick={up}>
+            <Button
+              disabled={currentTile.next_room_id_n === 0}
+              className={classes.upDownButton}
+              onClick={() => moveChar("north")}>
               <img src={upArrow} alt="up_arrow" />
             </Button>
             <div
@@ -56,15 +59,24 @@ const GameController = ({ up, left, right, down, speak }) => {
                 justifyContent: "space-between",
                 margin: "5px 0"
               }}>
-              <Button className={classes.leftButton} onClick={left}>
+              <Button
+                disabled={currentTile.next_room_id_w === 0}
+                className={classes.leftButton}
+                onClick={() => moveChar("west")}>
                 <img src={leftArrow} alt="left_arrow" />
               </Button>
-              <Button className={classes.rightButton} onClick={right}>
+              <Button
+                disabled={currentTile.next_room_id_e === 0}
+                className={classes.rightButton}
+                onClick={() => moveChar("east")}>
                 <img src={rightArrow} alt="right_arrow" />
               </Button>
             </div>
 
-            <Button className={classes.upDownButton} onClick={down}>
+            <Button
+              disabled={currentTile.next_room_id_s === 0}
+              className={classes.upDownButton}
+              onClick={() => moveChar("south")}>
               <img src={downArrow} alt="down_arrow" />
             </Button>
           </div>

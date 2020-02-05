@@ -9,7 +9,7 @@ import {
   Typography
 } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-
+import castleIcon from "../../assets/images/castle.png"
 const useStyles = makeStyles(theme => ({
   appBar: {
     backgroundColor: "#F45866"
@@ -19,6 +19,9 @@ const useStyles = makeStyles(theme => ({
   },
   fileMenuButton: {
     color: "white"
+  },
+  appTitle: {
+    fontFamily: "Pacifico"
   }
 }))
 
@@ -74,7 +77,10 @@ const GameNavBar = ({ createNewGame, exitGame }) => {
             </Menu>
           </div>
 
-          <Typography>Hero's Adventure</Typography>
+          <Typography className={classes.appTitle} variant="h5">
+            Hero's Adventure
+          </Typography>
+          <img src={castleIcon} alt="castle" style={{ marginLeft: "10px" }} />
         </Toolbar>
       </AppBar>
     </div>

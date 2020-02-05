@@ -4,7 +4,7 @@ import { MdArrowForward, MdArrowBack, MdArrowUpward, MdArrowDownward, MdArrowDro
 
 
 const Controls = props => {
-    const { currentTile, possDirect, moveChar } = props;
+    const { currentTile, moveChar } = props;
 
 
     return (

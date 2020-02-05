@@ -3,7 +3,6 @@ import React from 'react';
 
 const SurroundingMapTile = props => {
     const { possDirect } = props;
-    console.log('possDirect --> ', possDirect);
 
     if (possDirect === "corner") {
         return (

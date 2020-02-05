@@ -24,7 +24,7 @@ const GameMapContainer = () => {
     }
   }, [])
 
-  //console.log("mapData --> ", mapData)
+  console.log("mapData in gamemapcontainer --> ", mapData)
   // If there is mapData, render the maptiles
   return (
     <section className="section--map-container">

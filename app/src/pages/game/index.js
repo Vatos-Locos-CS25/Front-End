@@ -2,11 +2,18 @@ import React, { useEffect, useState } from "react"
 import axios from "axios"
 import GameNavBar from "../../components/navbar"
 import GameController from "../../components/controller"
-import { Grid } from "@material-ui/core"
+import { Box, Grid } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
-import GameMapContainer from "../../components/game/GameMapContainer";
-  
+import GameMapContainer from "../../components/game/GameMapContainer"
+
 const useStyles = makeStyles(theme => ({
+  playerLocationDisplay: {
+    display: "flex",
+    flexDirection: "row",
+    padding: theme.spacing(2),
+    backgroundColor: "#360849",
+    color: "#FFFFFF"
+  },
   gameControllerContainer: {
     marginTop: "calc(5% + 60px)",
     bottom: 0
@@ -65,12 +72,18 @@ const Game = ({ history }) => {
           />
         </Grid>
 
+        <Grid item xs={12}>
+          <Box className={classes.playerLocationDisplay}>
+            <div style={{ flex: 1 }}>You are in Room 1</div>
+            <div>Room Description</div>
+          </Box>
+        </Grid>
         <section className="section--game-container">
-          <section className="block--board">
-              <GameMapContainer />
-          </section>
+          <div className="block--board">
+            <GameMapContainer />
+          </div>
         </section>
-        
+
         <Grid item xs={12}>
           <GameController
             up={handleUpDirection}
@@ -78,7 +91,6 @@ const Game = ({ history }) => {
             right={handleRightDirection}
             down={handleDownDirection}
             speak={handleSpeak}
-            action={handleAction}
           />
         </Grid>
       </Grid>

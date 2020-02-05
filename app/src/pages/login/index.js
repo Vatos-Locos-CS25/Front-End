@@ -4,6 +4,7 @@ import axios from "axios"
 import { Formik } from "formik"
 import * as Yup from "yup"
 import LogInForm from "./LogInForm"
+
 const Login = ({ history }) => {
   const [loggedIn, setLoggedIn] = useState(false)
 
@@ -35,6 +36,7 @@ const Login = ({ history }) => {
       />
     </div>
   )
+
 }
 
 export default Login

@@ -6,6 +6,7 @@ import MapTiles from "./MapTiles"
 import Loading from "../Loading"
 
 const GameMapContainer = () => {
+
   const [mapData, setMapData] = useState(null)
 
   useEffect(() => {

@@ -8,7 +8,7 @@ import Loading from "../Loading";
 const GameMapContainer = () => {
     const [ mapData, setMapData ] = useState(null);
     
-    const testToken = "509bba415bd1211a1d65261cd86076c1c0581a5a"
+    const testToken = "46c59185cf2f53d347370c5191517a69b10a2045"
     
     useEffect(() => {
         axios({

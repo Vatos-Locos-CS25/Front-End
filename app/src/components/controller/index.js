@@ -1,12 +1,11 @@
 import React from "react"
-import { AppBar, Button, Fab, Grid } from "@material-ui/core"
+import { AppBar, Button, Fab, Grid, Tooltip } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import upArrow from "../../assets/images/up_arrow.png"
 import leftArrow from "../../assets/images/left_arrow.png"
 import rightArrow from "../../assets/images/right_arrow.png"
 import downArrow from "../../assets/images/down_arrow.png"
 import speakIcon from "../../assets/images/speak.png"
-import actionIcon from "../../assets/images/action_b.png"
 
 const useStyles = makeStyles(theme => ({
   controller: {
@@ -37,7 +36,7 @@ const useStyles = makeStyles(theme => ({
     color: "#FFFFFF"
   }
 }))
-const GameController = ({ up, left, right, down, speak, action }) => {
+const GameController = ({ up, left, right, down, speak }) => {
   const classes = useStyles()
   return (
     <AppBar position="fixed" className={classes.controller}>
@@ -77,12 +76,12 @@ const GameController = ({ up, left, right, down, speak, action }) => {
               <img src={speakIcon} alt="speak" />
             </Fab>
 
-            <Fab
+            {/* <Fab
               className={classes.actionButton}
               onClick={action}
               variant="extended">
               <img src={actionIcon} alt="action" />
-            </Fab>
+            </Fab> */}
           </div>
         </Grid>
       </Grid>

@@ -7,8 +7,6 @@ import * as Yup from "yup"
 import RegistrationForm from "./RegistrationForm"
 
 const Registration = ({history}) => {
-
-    const request = process.env.NODE_ENV === "production" ? "https://wack-ass-game.herokuapp.com" : "http://localhost:8000"
     const [registered, setRegistered] = useState(false)
 
     useEffect(()=>{
@@ -27,12 +25,11 @@ const Registration = ({history}) => {
         <div className="block--registration-login">
             <Formik initialValues={{username:"", email:"", password1: "", password2:""}} onSubmit={(values, actions) => {
                 
-                axios.post(`${request}/api/registration/`, values)
+                axios.post(`https://wack-ass-game.herokuapp.com/api/registration/`, values)
                 .then(response => {
                     const serializedToken = JSON.stringify(response.data)
                     localStorage.setItem("mud_token", serializedToken)
                     setRegistered(true)
-                    
                 })
             }}
             render={formikProps => (

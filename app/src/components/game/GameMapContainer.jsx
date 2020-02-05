@@ -7,14 +7,15 @@ import Loading from "../Loading";
 
 const GameMapContainer = () => {
     const [ mapData, setMapData ] = useState(null);
-    
-    const testToken = "46c59185cf2f53d347370c5191517a69b10a2045"
+
+    const serializedToken = localStorage.getItem("mud_token")
+    const token = JSON.parse(serializedToken)
     
     useEffect(() => {
         axios({
             method: "GET",
             baseURL: "https://wack-ass-game.herokuapp.com/api/adv/rooms",
-            headers: { "Authorization": `Token ${testToken}` }
+            headers: { "Authorization": `Token ${token.key}` }
         })
         .then(response => setMapData(response.data))
         .catch(error=>console.log(error))

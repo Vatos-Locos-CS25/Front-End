@@ -23,11 +23,6 @@ const useStyles = makeStyles(theme => ({
 const Game = ({ history }) => {
   const classes = useStyles()
 
-  const request =
-    process.env.NODE_ENV === "production"
-      ? "https://wack-ass-game.herokuapp.com"
-      : "http://localhost:8000"
-
   const [newGame, setNewGame] = useState(true)
 
   const [exitGame, setExitGame] = useState(false)
@@ -43,7 +38,7 @@ const Game = ({ history }) => {
   }
 
   const handleExitGame = () => {
-    axios.post(`${request}/api/logout/`).then(response => {
+    axios.post(`https://wack-ass-game.herokuapp.com/api/logout/`).then(response => {
       localStorage.removeItem("mud_token")
       setExitGame(true)
     })

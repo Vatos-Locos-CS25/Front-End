@@ -37,6 +37,14 @@
             color: $ocean / 2;
         }
     }
+    .main--map-tiles-auto {
+        width: 80%;
+        display: grid;
+        grid-gap: 15px;
+        grid-template-columns: repeat(auto-fit, 100px);
+        background-color: $darkland;
+        padding: 10px;
+    }
 }
 
 
@@ -44,6 +52,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100px;
+    width: 100px;
 }
 
 .block--tile_char {
@@ -87,13 +97,14 @@
 
 .block--tile_path {
     background-color: $grass;
+    
 }
 .block--tile_oldpath {
     background-color: $grass / 2;
 }
 
 .block--tile_blocked {
-    background-color: $land;
+    background-color: $land / 2;
 }
 .block--tile_corner {
     background-color: $darkland;

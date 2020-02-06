@@ -27,7 +27,7 @@ const Registration = ({history}) => {
         <div className="block--registration-login">
             <Formik initialValues={{username:"", email:"", password1: "", password2:""}} onSubmit={(values, actions) => {
                 
-                axios.post(`${request}/api/registration/`, values)
+                axios.post(`https://wack-ass-game.herokuapp.com/api/registration/`, values)
                 .then(response => {
                     const serializedToken = JSON.stringify(response.data)
                     localStorage.setItem("mud_token", serializedToken)

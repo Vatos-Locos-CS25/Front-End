@@ -14,7 +14,7 @@ const GameMapContainer = () => {
         axios({
             method: "GET",
             baseURL: "https://wack-ass-game.herokuapp.com/api/adv/rooms",
-            headers: { "Authorization": `Token ${testToken}` }
+            headers: { "Authorization": `Token ${JSON.parse(localStorage.getItem('mud_token')).key}` }
         })
         .then(response => setMapData(response.data))
         .catch(error=>console.log(error))

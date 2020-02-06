@@ -5,6 +5,7 @@ import GameController from "../../components/controller"
 import { Box, Grid } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import GameMapContainer from "../../components/game/GameMapContainer"
+import Chat from '../../components/game/Chat'
 
 const useStyles = makeStyles(theme => ({
   playerLocationDisplay: {
@@ -22,11 +23,7 @@ const useStyles = makeStyles(theme => ({
 
 const Game = ({ history }) => {
   const classes = useStyles()
-
-  const request =
-    process.env.NODE_ENV === "production"
-      ? "https://wack-ass-game.herokuapp.com"
-      : "http://localhost:8000"
+  const [chat, setCat] = useState(false)
 
   const [newGame, setNewGame] = useState(true)
 
@@ -43,10 +40,14 @@ const Game = ({ history }) => {
   }
 
   const handleExitGame = () => {
-    axios.post(`${request}/api/logout/`).then(response => {
+    axios.post(`https://wack-ass-game.herokuapp.com/api/logout/`).then(response => {
       localStorage.removeItem("mud_token")
       setExitGame(true)
     })
+  }
+
+  const chatToggle = () => {
+    setCat(!chat)
   }
 
   //Directional Control Handlers
@@ -64,7 +65,7 @@ const Game = ({ history }) => {
 
   return (
     <div>
-      <Grid container>
+      {/* <Grid container> */}
         <Grid item xs={12}>
           <GameNavBar
             createNewGame={handleCreateNewGame}
@@ -78,22 +79,28 @@ const Game = ({ history }) => {
             <div>Room Description</div>
           </Box>
         </Grid>
-        <section className="section--game-container">
-          <div className="block--board">
-            <GameMapContainer />
-          </div>
-        </section>
+        <div className='flex'>
+          {/* <div> */}
+            <section className="section--game-container">
+              <div className="block--board">
+                <GameMapContainer />
+              </div>
+            </section>
 
-        <Grid item xs={12}>
-          <GameController
-            up={handleUpDirection}
-            left={handleLeftDirection}
-            right={handleRightDirection}
-            down={handleDownDirection}
-            speak={handleSpeak}
-          />
-        </Grid>
-      </Grid>
+            {/* <Grid item xs={12}> */}
+              <GameController
+                up={handleUpDirection}
+                left={handleLeftDirection}
+                right={handleRightDirection}
+                down={handleDownDirection}
+                speak={handleSpeak}
+                chatToggle={chatToggle}
+              />
+            {/* </Grid> */}
+          {/* </div> */}
+          <Chat chat={chat}/>
+        </div>
+      {/* </Grid> */}
     </div>
   )
 }

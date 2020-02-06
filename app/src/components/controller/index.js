@@ -36,7 +36,7 @@ const useStyles = makeStyles(theme => ({
     color: "#FFFFFF"
   }
 }))
-const GameController = ({ up, left, right, down, speak }) => {
+const GameController = ({ up, left, right, down, speak, chatToggle }) => {
   const classes = useStyles()
   return (
     <AppBar position="fixed" className={classes.controller}>
@@ -71,7 +71,7 @@ const GameController = ({ up, left, right, down, speak }) => {
         </Grid>
         <Grid item>Mini Map Placeholder</Grid>
         <Grid item>
-          <div style={{ display: "flex", flexDirection: "column" }}>
+          <div onClick={chatToggle} style={{ display: "flex", flexDirection: "column" }}>
             <Fab className={classes.actionButton} onClick={speak}>
               <img src={speakIcon} alt="speak" />
             </Fab>

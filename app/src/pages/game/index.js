@@ -5,12 +5,9 @@ import GameController from "../../components/controller"
 import { Box, Grid } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import GameMapContainer from "../../components/game/GameMapContainer"
-<<<<<<< HEAD
+import Chat from "../../components/game/Chat"
 import locationIcon from "../../assets/images/location.png"
-=======
-import Chat from '../../components/game/Chat'
 
->>>>>>> 896cc7c51a79abd6236e6b2736f89b30c89ac4c6
 const useStyles = makeStyles(theme => ({
   playerLocationDisplay: {
     display: "flex",
@@ -24,18 +21,28 @@ const useStyles = makeStyles(theme => ({
   gameControllerContainer: {
     marginTop: "calc(5% + 60px)",
     bottom: 0
+  },
+  gameBoardContainer: {
+    display: "flex",
+    justifyContent: "space-between",
+    padding: theme.spacing(2)
+  },
+  gameBoard: {
+    flexGrow: 4
+  },
+  chat: {
+    flexGrow: 1,
+    marginLeft: "16px",
+    padding: theme.spacing(1)
   }
 }))
 
 const Game = ({ history }) => {
   const classes = useStyles()
-<<<<<<< HEAD
 
   const jsontoken = localStorage.getItem("mud_token")
   const token = JSON.parse(jsontoken)
-=======
   const [chat, setCat] = useState(false)
->>>>>>> 896cc7c51a79abd6236e6b2736f89b30c89ac4c6
 
   const [newGame, setNewGame] = useState(true)
 
@@ -55,8 +62,6 @@ const Game = ({ history }) => {
   const [mapData, setMapData] = useState(null)
 
   const [mapLandState, setMapLandState] = useState({ currentRoomId: 1 })
-
-  const [currentRoom, setCurrentRoom] = useState({ title: "" })
 
   useEffect(() => {
     if (exitGame) {
@@ -83,19 +88,12 @@ const Game = ({ history }) => {
   }
 
   const handleExitGame = () => {
-<<<<<<< HEAD
     axios
       .post(`https://wack-ass-game.herokuapp.com/api/logout/`)
       .then(response => {
         localStorage.removeItem("mud_token")
         setExitGame(true)
       })
-=======
-    axios.post(`https://wack-ass-game.herokuapp.com/api/logout/`).then(response => {
-      localStorage.removeItem("mud_token")
-      setExitGame(true)
-    })
->>>>>>> 896cc7c51a79abd6236e6b2736f89b30c89ac4c6
   }
 
   const chatToggle = () => {
@@ -132,46 +130,53 @@ const Game = ({ history }) => {
   return (
     <div>
       {/* <Grid container> */}
-        <Grid item xs={12}>
-          <GameNavBar
-            createNewGame={handleCreateNewGame}
-            exitGame={handleExitGame}
-          />
-        </Grid>
+      <Grid item xs={12}>
+        <GameNavBar
+          createNewGame={handleCreateNewGame}
+          exitGame={handleExitGame}
+        />
+      </Grid>
 
-        <Grid item xs={12}>
-          {possDirect && possDirect.currentTile && (
-            <Box className={classes.playerLocationDisplay}>
-              <img src={locationIcon} alt="location" />
-              <div style={{ flex: 1 }}>
-                You are in the {possDirect.currentTile.title} room
-              </div>
-              <div>{possDirect.currentTile.description}</div>
-            </Box>
-          )}
-        </Grid>
-        <div className='flex'>
-          {/* <div> */}
+      <Grid item xs={12}>
+        {possDirect && possDirect.currentTile && (
+          <Box className={classes.playerLocationDisplay}>
+            <img src={locationIcon} alt="location" />
+            <div style={{ flex: 1 }}>
+              You are in the {possDirect.currentTile.title} room
+            </div>
+            <div>{possDirect.currentTile.description}</div>
+          </Box>
+        )}
+      </Grid>
+      <Grid item xs={12}>
+        <div className={classes.gameBoardContainer}>
+          <div className={classes.gameBoard}>
             <section className="section--game-container">
               <div className="block--board">
-                <GameMapContainer />
+                <GameMapContainer
+                  mapData={mapData}
+                  mapLandState={mapLandState}
+                  setMapLandState={setMapLandState}
+                  possDirect={possDirect}
+                  setPossDirect={setPossDirect}
+                />
               </div>
             </section>
-
-            {/* <Grid item xs={12}> */}
-              <GameController
-                up={handleUpDirection}
-                left={handleLeftDirection}
-                right={handleRightDirection}
-                down={handleDownDirection}
-                speak={handleSpeak}
-                chatToggle={chatToggle}
-              />
-            {/* </Grid> */}
-          {/* </div> */}
-          <Chat chat={chat}/>
+          </div>
+          <div className={classes.chat}>
+            <Chat chat={chat} />
+          </div>
         </div>
-      {/* </Grid> */}
+      </Grid>
+
+      <Grid item xs={12}>
+        <GameController
+          currentTile={possDirect.currentTile}
+          moveChar={moveChar}
+          speak={handleSpeak}
+          chatToggle={chatToggle}
+        />
+      </Grid>
     </div>
   )
 }

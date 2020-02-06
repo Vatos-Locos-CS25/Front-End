@@ -43,11 +43,10 @@
 
 // Character
 .block--tile_char {
-    background-color: $grass;
     border-radius: 50px;
     z-index: 3;
     .icon--char {
-        font-size: 2.8rem;
+        font-size: 1.7rem;
         color: $white;
     }
 }
@@ -57,8 +56,8 @@
     background-color: $grass;
 }
 .block--tile_oldpath {
-    color: $land;
-    background-color: $darkland / 1.25;
+    color: $land / 1.5;
+    background-color: $darkland / 1;
 }
 .block--tile_blocked {
     background-color: $land / 2;
@@ -81,12 +80,12 @@
         font-size: 3rem;
         position: absolute;
         display: block;
-        color: $darkland * 1.5;
+        color: rgba($darkland * 2, 0.75);
     }
     .icon--char-direct.center {
         background-color: $grass;
-        height: 55px;
-        width: 55px;
+        height: 45px;
+        width: 45px;
         z-index: 3;
         border-radius: 100%;
     }

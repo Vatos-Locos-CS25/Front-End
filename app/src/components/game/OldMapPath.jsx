@@ -21,7 +21,7 @@ const OldMapPath = props => {
             {moveHistory.map((eachMove, index) => (
                 <React.Fragment key={index}>
                     {index === 0 ? null : (
-                        <GiBrickWall className="block--tile_oldpath" style={{transform: `translate(${eachMove.x}px, ${eachMove.y}px)`}} />
+                        <GiBrickWall className="block--tile_oldpath" style={{transform: `translate(${eachMove.x}px, ${eachMove.y}px) scale(1, 1)`}} />
                     )}
                 </React.Fragment>
             ))}

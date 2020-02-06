@@ -3,33 +3,42 @@ import { useState } from "react";
 import { useEffect } from 'react';
 import { GiGriffinSymbol, GiThrust } from "react-icons/gi";
 
-
 const SurroundingMapTile = props => {
-    const { currentTile, lastTile, 
-        // roomId, 
+    const { 
+        currentTile, 
+        lastTile,
         possDirect,
         moveHistory,
-        setMoveHistory 
+        setMoveHistory,
     } = props;
 
     const [ charTranslate, setCharTranslate ] = useState({ x: 0, y: 0, display: true });
-    
+
     let mapTransform = {
         transform: `translate(${charTranslate.x}px, ${charTranslate.y}px )`,
         display: `${charTranslate.display ? "flex" : "none"}`
     }
 
     useEffect(() => {
-        // Forwards
-        if (currentTile.x_coor > lastTile.x_coor) setCharTranslate({ ...charTranslate, x: charTranslate.x + 50, display: true })
-        if (currentTile.y_coor > lastTile.y_coor) setCharTranslate({ ...charTranslate, y: charTranslate.y - 50, display: true })
+        if (currentTile.x_coor >= 0 || currentTile.y_coor >= 0) setCharTranslate({ 
+            ...charTranslate, 
+            x: currentTile.x_coor * 50, 
+            y: -currentTile.y_coor * 50,
+            display: true
+        })
 
-        // Backwards
-        if (currentTile.x_coor < lastTile.x_coor) setCharTranslate({ ...charTranslate, x: charTranslate.x - 50, display: true })
-        if (currentTile.y_coor < lastTile.y_coor) setCharTranslate({ ...charTranslate, y: charTranslate.y + 50, display: true })
+        // // Forwards
+        // if (currentTile.x_coor > lastTile.x_coor) setCharTranslate({ ...charTranslate, x: charTranslate.x + 50, display: true })
+        // if (currentTile.y_coor > lastTile.y_coor) setCharTranslate({ ...charTranslate, y: charTranslate.y - 50, display: true })
+
+        // // Backwards
+        // if (currentTile.x_coor < lastTile.x_coor) setCharTranslate({ ...charTranslate, x: charTranslate.x - 50, display: true })
+        // if (currentTile.y_coor < lastTile.y_coor) setCharTranslate({ ...charTranslate, y: charTranslate.y + 50, display: true })
 
         if (lastTile.room_id !== undefined) setMoveHistory([ ...moveHistory, { x: lastTile.x_coor * 50, y: -lastTile.y_coor * 50 }])
     }, [currentTile])
+
+    console.log('possdirect current tile --> ', possDirect.currentTile.x_coor * 50,  -possDirect.currentTile.y_coor * 50);
 
     return (
         <>

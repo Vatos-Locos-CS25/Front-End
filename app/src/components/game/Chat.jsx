@@ -66,6 +66,7 @@ const Chat = props => {
     const channel = pusher.subscribe("my-channel")
     channel.bind("my-event", function(data) {
       console.log(data)
+      setChat(chat => [...chat, data])
     })
   }, [])
 

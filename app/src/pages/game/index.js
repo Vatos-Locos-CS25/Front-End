@@ -162,6 +162,7 @@ const Game = ({ history }) => {
                 possDirect={possDirect}
                 setPossDirect={setPossDirect}
                 handleInitData={handleInitData}
+                initData={initData}
               />
             </div>
           </section>

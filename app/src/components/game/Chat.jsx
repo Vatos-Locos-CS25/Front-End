@@ -35,7 +35,7 @@ const Chat = props => {
   const [message, setMessage] = useState("")
   const [user, setUser] = useState("")
 
-  const [pusher, setPusher] = useState('')
+  // const [pusher, setPusher] = useState('')
 
   Pusher.logToConsole = true
   
@@ -65,7 +65,7 @@ const Chat = props => {
     })
     const channel = pusher.subscribe("my-channel")
     channel.bind("my-event", function(data) {
-      console.log(data)
+      console.log('DATAAAAAAAAAAAAAAA',data)
       setChat(chat => [...chat, data])
     })
   }, [])

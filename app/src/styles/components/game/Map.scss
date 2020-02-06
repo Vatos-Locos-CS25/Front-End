@@ -1,37 +1,18 @@
 
 .section--map-container {
-    background-color: $ocean / 1.5%;
+    background-color: $white;
     height: 100%;
     position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 10px;
-    box-shadow: 3px 5px 10px -5px black, -3px 4px 15px -5px black;
+    padding-right: 20px;
     .main--map-tiles {
         width: 100%;
-        height: calc(100vh - 300px);
+        height: calc(100vh - 265px);
         background-color: $darkland;
-        padding: 10px;
-        border-radius: 10px;
-    }
-    .block--game-controls {
-        position: absolute;
-        left: 0;
-        top: 0;
-        font-size: 4.2rem;
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        grid-gap: 10px;
-        .icon-gamepad-key.active {
-            color: $white;
-        }
-        .icon-gamepad-key.inactive {
-            color: $white / 2;
-        }
-        .icon-gamepad-key.inactive.big-lever {
-            color: $ocean / 2;
-        }
+        position: relative;
+        box-shadow: inset 3px 5px 10px -5px black, inset -3px 4px 15px -5px black;
     }
 }
 

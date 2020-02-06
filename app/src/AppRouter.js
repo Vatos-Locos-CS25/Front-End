@@ -20,9 +20,6 @@ const AppRouter = () => {
             <Route exact path="/registration" component={Registration} />
             <Route exact path="/login" component={LogIn} />
             <PrivateRoute exact path="/game" component={Game} />
-            {/* Remove me when done, please */}
-            <Route exact path="/game-dev" component={Game} />
-            {/* ^^^ */}
           </Switch>
         </Router>
       </MuiThemeProvider>

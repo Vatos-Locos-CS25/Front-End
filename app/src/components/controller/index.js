@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
     top: "auto",
     bottom: 0,
     backgroundColor: "#F45866",
-    padding: theme.spacing(8, 2)
+    padding: "10px 0"
   },
   directionalController: {
     padding: theme.spacing(1)
@@ -53,7 +53,7 @@ const useStyles = makeStyles(theme => ({
 const GameController = ({ currentTile, initData, moveChar }) => {
   const classes = useStyles()
   return (
-    <AppBar position="fixed" className={classes.controller}>
+    <AppBar position="relative" className={classes.controller}>
       <Grid container justify="space-around">
         <Grid item>
           <div

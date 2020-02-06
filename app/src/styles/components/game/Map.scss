@@ -6,23 +6,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 25px;
     border-radius: 10px;
     box-shadow: 3px 5px 10px -5px black, -3px 4px 15px -5px black;
     .main--map-tiles {
-        width: 320px;
-        height: 320px;
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-template-rows: 1fr 1fr 1fr;
-        grid-gap: 5px;
+        width: 100%;
+        height: calc(100vh - 300px);
         background-color: $darkland;
         padding: 10px;
+        border-radius: 10px;
     }
     .block--game-controls {
         position: absolute;
         left: 0;
-        bottom: 0;
+        top: 0;
         font-size: 4.2rem;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -37,76 +33,92 @@
             color: $ocean / 2;
         }
     }
-    .main--map-tiles-auto {
-        width: 80%;
-        display: grid;
-        grid-gap: 15px;
-        grid-template-columns: repeat(auto-fit, 100px);
-        background-color: $darkland;
-        padding: 10px;
-    }
 }
 
-
+// All tiles
 [class*="block--tile"] {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100px;
-    width: 100px;
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
 }
 
-.block--tile_char {
-    background-color: $grass;
-    border-radius: 100px;
-    .icon--char {
-        font-size: 6rem;
+// Start point
+.block--tile_start {
+    background-color: $land;
+    color: $darkland;
+    border-radius: 50px;
+    .icon--start {
+        font-size: 2.4rem;
+    }
+    .block--start-data {
+        position: absolute;
         color: $white;
     }
-    .block--char-data {
-        position: absolute;
-        color: $darkland;
-    }
-    .block--char-direct-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        position: absolute;
-        width: 120px;
-        height: 120px;
-        .icon--char-direct {
-            font-size: 3rem;
-            position: absolute;
-            display: block;
-            color: $grass / 1.5;
-        }
-        .icon--char-direct.north {
-            top: 0;
-        }
-        .icon--char-direct.east {
-            right: 0;
-        }
-        .icon--char-direct.south {
-            bottom: 0;
-        }
-        .icon--char-direct.west {
-            left: 0;
-        }
+}
+
+// Character
+.block--tile_char {
+    background-color: $grass;
+    border-radius: 50px;
+    z-index: 3;
+    .icon--char {
+        font-size: 2.8rem;
+        color: $white;
     }
 }
 
+// Path colors
 .block--tile_path {
     background-color: $grass;
-    
 }
 .block--tile_oldpath {
     background-color: $grass / 2;
 }
-
 .block--tile_blocked {
     background-color: $land / 2;
 }
 .block--tile_corner {
     background-color: $darkland;
     color: $land;
+}
+
+// Directional
+.block--char-direct-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 125px;
+    height: 125px;
+    z-index: -1;
+    .icon--char-direct {
+        font-size: 3rem;
+        position: absolute;
+        display: block;
+        color: $darkland * 1.5;
+    }
+    .icon--char-direct.center {
+        background-color: $grass;
+        height: 55px;
+        width: 55px;
+        z-index: 3;
+        border-radius: 100%;
+    }
+    .icon--char-direct.north {
+        top: 0;
+    }
+    .icon--char-direct.east {
+        right: 0;
+    }
+    .icon--char-direct.south {
+        bottom: 0;
+    }
+    .icon--char-direct.west {
+        left: 0;
+    }
 }

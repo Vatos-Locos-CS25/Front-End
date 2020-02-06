@@ -35,11 +35,10 @@ const Chat = props => {
   const [message, setMessage] = useState("")
   const [user, setUser] = useState("")
 
+  const [pusher, setPusher] = useState('')
+
   Pusher.logToConsole = true
-  const pusher = new Pusher("103635f1e5e86ef0cf06", {
-    cluster: "us2",
-    forceTLS: true
-  })
+  
   useEffect(() => {
     axios
       .get("https://wack-ass-game.herokuapp.com/api/adv/init", {
@@ -55,14 +54,28 @@ const Chat = props => {
       .catch(err => {
         console.log("ERRRRORRRR")
       })
+      // setPusher(new Pusher("103635f1e5e86ef0cf06", {
+      //   cluster: "us2",
+      //   forceTLS: true
+      // }))
 
+    const pusher = new Pusher("103635f1e5e86ef0cf06", {
+        cluster: "us2",
+        forceTLS: true
+    })
     const channel = pusher.subscribe("my-channel")
-    channel.bind("my-event", function(data) {})
+    channel.bind("my-event", function(data) {
+      console.log(data)
+    })
   }, [])
 
-  pusher.bind("my-event", data => {
-    setChat(chat => [...chat, data])
-  })
+  // if(pusher !== ''){
+  //   pusher.bind("my-event", data => {
+  //     console.log('DATAAAAAAA', data)
+  //     setChat(chat => [...chat, data])
+  //   })
+  // }
+  
 
   const messageHandler = e => {
     setMessage(e.target.value)

@@ -1,14 +1,15 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 import StartTile from "./StartTile";
 import CharacterTile from "./CharacterTile";
-import axios from 'axios';
+import OldMapPath from "./OldMapPath";
 
 
 const MapTiles = props => {
     const { mapData, mapLandState, setMapLandState, possDirect, setPossDirect, handleInitData } = props;
-
+    const [ moveHistory, setMoveHistory ] = useState([])
     const jsontoken = localStorage.getItem("mud_token");
     const token = JSON.parse(jsontoken);
 
@@ -52,11 +53,7 @@ const MapTiles = props => {
         // Todo: utilize init data
         // Probably grab players data and do smething with it
         // somethingWithInitData()
-
     }, [ mapLandState.currentRoomId, setPossDirect ])
-
-    // console.log('possDirect --> ', possDirect);
-    // console.log('mapLandState --> ', mapLandState);
 
     // Todo: programatically generate tiles
     return (
@@ -64,14 +61,21 @@ const MapTiles = props => {
             {possDirect && possDirect.lastTile && (
                 <>
                     <main className="main--map-tiles">
+
+                        <OldMapPath moveHistory={moveHistory} />
+
                         <StartTile  />
 
                         <CharacterTile 
                             currentTile={possDirect.currentTile}
                             lastTile={possDirect.lastTile}
                             roomId={mapLandState.currentRoomId}  
-                            possDirect={possDirect} 
+                            possDirect={possDirect}
+                            moveHistory={moveHistory}
+                            setMoveHistory={setMoveHistory}
                         />
+
+
                     </main>
                 </>
             )}

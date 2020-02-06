@@ -146,7 +146,6 @@ const Game = ({ history }) => {
             <div style={{ flex: 1 }}>
               You are in the {possDirect.currentTile.title} room
             </div>
-            <div>{possDirect.currentTile.description}</div>
           </Box>
         )}
 

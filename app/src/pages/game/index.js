@@ -32,22 +32,18 @@ const Game = ({ history }) => {
 
   const [exitGame, setExitGame] = useState(false)
 
+  // Possdirect is how we track the history of movement
+  // and where we store the directions a player can move
   const [possDirect, setPossDirect] = useState({
-    lastTileId: {},
-    currentTile: {
-      north: false,
-      south: false,
-      east: false,
-      west: false,
-      room_id: 1
-    }
+    lastTile: false,
+    currentTile: {}
   })
 
   const [mapData, setMapData] = useState(null)
 
   const [mapLandState, setMapLandState] = useState({ currentRoomId: 1 })
 
-  const [currentRoom, setCurrentRoom] = useState({ title: "" })
+  // const [currentRoom, setCurrentRoom] = useState({ title: "" })
 
   useEffect(() => {
     if (exitGame) {
@@ -126,7 +122,7 @@ const Game = ({ history }) => {
               <div style={{ flex: 1 }}>
                 You are in the {possDirect.currentTile.title} room
               </div>
-              <div>{possDirect.currentTile.description}</div>
+              <div>Room #{possDirect.currentTile.room_id}</div>
             </Box>
           )}
         </Grid>

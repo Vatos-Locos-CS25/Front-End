@@ -1,26 +1,16 @@
 import React from 'react';
 import { useEffect, useState } from 'react';
 
-import CharMapTile from "./CharMapTile";
-import SurroundingMapTile from "./SurroundingMapTile";
-import Controls from "./Controls";
+import StartTile from "./StartTile";
+import CharacterTile from "./CharacterTile";
 import axios from 'axios';
 
 
 const MapTiles = props => {
-    const { mapData } = props;
-
-    const [ mapLandState, setMapLandState ] = useState({ currentRoomId: 1 });
+    const { mapData, mapLandState, setMapLandState, possDirect, setPossDirect } = props;
 
     const jsontoken = localStorage.getItem("mud_token");
     const token = JSON.parse(jsontoken);
-
-    // Possdirect is how we track the history of movement
-    // and where we store the directions a player can move
-    const [ possDirect, setPossDirect ] = useState({
-        lastTile: false,
-        currentTile: {}
-    })
 
     const createMapTiles = currentRoom => {
         // Creates map tiles that coordinate with user position
@@ -35,34 +25,6 @@ const MapTiles = props => {
             lastTile: possDirect.currentTile,
             currentTile: { ...currRoom[0] },
         });
-
-        
-
-        // createMap();
-    };
-    
-    const moveChar = directClicked => {
-        // Retrieve token from local storage, parse, pass to api call
-        // Receive the direction, extract first letter, pass as data
-        // Update hook with new current room
-        // New current room triggers useEffect, 
-        // use effect updates the map layout
-        // from big map array.
-        // Also check to make sure token is legit, first
-        if (token && token.key) {
-            axios({
-                method: "POST",
-                baseURL: "https://wack-ass-game.herokuapp.com/api/adv/move",
-                headers: { "Authorization": `Token ${token.key}` },
-                data: { "direction": directClicked.slice(0,1) }
-            })
-            .then(response => {
-                let currRoom = mapData.filter(room => room.room_id === mapLandState.currentRoomId);
-                setPossDirect({...possDirect, lastTile: { ...currRoom[0] }})
-                setMapLandState({ currentRoomId: response.data.room_id }) 
-            })
-            .catch(error => console.log("We have a move error", error))
-        };
     };
 
     useEffect(() => {
@@ -102,33 +64,32 @@ const MapTiles = props => {
                 <>
                     <main className="main--map-tiles">
         
-                        <CharMapTile  
+                        <StartTile  
                             roomId={mapLandState.currentRoomId}  
                             possDirect={possDirect} 
                         />
-                        <SurroundingMapTile 
+                        <CharacterTile 
                             direction={"north"}
                             possDirect={possDirect.currentTile.next_room_id_n}
                             lastTile={possDirect.lastTile}
                         />
-                        <SurroundingMapTile 
+                        <CharacterTile 
                             direction={"east"}
                             possDirect={possDirect.currentTile.next_room_id_e}
                             lastTile={possDirect.lastTile}
                         />
-                        <SurroundingMapTile 
+                        <CharacterTile 
                             direction={"south"}
                             possDirect={possDirect.currentTile.next_room_id_s}  
                             lastTile={possDirect.lastTile}  
                         />
-                        <SurroundingMapTile 
+                        <CharacterTile 
                             direction={"west"}
                             possDirect={possDirect.currentTile.next_room_id_w}  
                             lastTile={possDirect.lastTile}  
                         />
         
                     </main>
-                    <Controls currentTile={possDirect.currentTile}  moveChar={moveChar} />
                 </>
             )}
         </>

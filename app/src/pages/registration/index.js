@@ -6,7 +6,6 @@ import * as Yup from "yup"
 
 import RegistrationForm from "./RegistrationForm"
 
-
 const Registration = ({ history }) => {
   //const request = process.env.NODE_ENV === "production" ? "https://wack-ass-game.herokuapp.com" : "http://localhost:8000"
   const [registered, setRegistered] = useState(false)

@@ -1,26 +1,23 @@
 import React from 'react';
 import { useState } from "react";
 import { useEffect } from 'react';
-import { GiGriffinSymbol, GiThrust, GiAbstract039 } from "react-icons/gi";
+import { GiGriffinSymbol, GiThrust } from "react-icons/gi";
 
 
 const SurroundingMapTile = props => {
-    const { currentTile, lastTile, roomId, possDirect } = props;
+    const { currentTile, lastTile, 
+        // roomId, 
+        possDirect,
+        moveHistory,
+        setMoveHistory 
+    } = props;
 
-    
     const [ charTranslate, setCharTranslate ] = useState({ x: 0, y: 0, display: true });
-    const [ moveHistory, setMoveHistory ] = useState([])
     
     let mapTransform = {
         transform: `translate(${charTranslate.x}px, ${charTranslate.y}px )`,
         display: `${charTranslate.display ? "flex" : "none"}`
     }
-    
-    // console.log('currentTile, lastTile, direction, move history, last move --> \n', 
-    // currentTile, "\n", lastTile, "\n", direction, "\n", moveHistory, moveHistory[moveHistory.length - 1]);
-    
-    // console.log('current x,y --> ', currentTile.x_coor, currentTile.y_coor );
-    // console.log('last x,y --> ', lastTile.x_coor, lastTile.y_coor );
 
     useEffect(() => {
         // Forwards
@@ -31,7 +28,7 @@ const SurroundingMapTile = props => {
         if (currentTile.x_coor < lastTile.x_coor) setCharTranslate({ ...charTranslate, x: charTranslate.x - 50, display: true })
         if (currentTile.y_coor < lastTile.y_coor) setCharTranslate({ ...charTranslate, y: charTranslate.y + 50, display: true })
 
-        if (lastTile.room_id !== undefined) setMoveHistory(moveHistory.concat(lastTile.room_id))
+        if (lastTile.room_id !== undefined) setMoveHistory([ ...moveHistory, { x: lastTile.x_coor * 50, y: -lastTile.y_coor * 50 }])
     }, [currentTile])
 
     return (
@@ -49,7 +46,7 @@ const SurroundingMapTile = props => {
                         <GiThrust className="icon--char-direct south" style={{transform:"rotate(180deg) scale(0.75, 1.25)"}} />
                     )}
                     {possDirect.currentTile.west && (
-                        <GiThrust className="icon--char-direct west" style={{transform:"rotate(240deg) scale(0.75, 1.25)"}} />
+                        <GiThrust className="icon--char-direct west" style={{transform:"rotate(270deg) scale(0.75, 1.25)"}} />
                     )}
                 </div>
                 <GiGriffinSymbol className="icon--char" /> 

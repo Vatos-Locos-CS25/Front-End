@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react"
 import axios from "axios"
 
 import { Formik } from "formik"
-import * as Yup from "yup"
+// import * as Yup from "yup"
 import LogInForm from "./LogInForm"
 
 const Login = ({ history }) => {

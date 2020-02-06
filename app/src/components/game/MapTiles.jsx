@@ -12,7 +12,8 @@ const MapTiles = ({
   mapLandState,
   setMapLandState,
   possDirect,
-  setPossDirect
+  setPossDirect,
+  handleInitData
 }) => {
   //const { mapData } = props;
 
@@ -89,9 +90,10 @@ const MapTiles = ({
         baseURL: "https://wack-ass-game.herokuapp.com/api/adv/init",
         headers: { Authorization: `Token ${token.key}` }
       })
-        .then(response =>
+        .then(response => {
           setMapLandState({ currentRoomId: response.data.room_id })
-        )
+          handleInitData(response.data)
+        })
         .catch(error => console.log("We have an init error", error))
     }
 

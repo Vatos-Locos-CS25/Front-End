@@ -5,7 +5,9 @@ import GameController from "../../components/controller"
 import { Box, Grid } from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import GameMapContainer from "../../components/game/GameMapContainer"
+import Chat from "../../components/game/Chat"
 import locationIcon from "../../assets/images/location.png"
+
 const useStyles = makeStyles(theme => ({
   playerLocationDisplay: {
     display: "flex",
@@ -19,6 +21,19 @@ const useStyles = makeStyles(theme => ({
   gameControllerContainer: {
     marginTop: "calc(5% + 60px)",
     bottom: 0
+  },
+  gameBoardContainer: {
+    display: "flex",
+    justifyContent: "space-between",
+    padding: theme.spacing(2)
+  },
+  gameBoard: {
+    flexGrow: 4
+  },
+  chat: {
+    flexGrow: 1,
+    marginLeft: "16px",
+    padding: theme.spacing(1)
   }
 }))
 
@@ -27,6 +42,9 @@ const Game = ({ history }) => {
 
   const jsontoken = localStorage.getItem("mud_token")
   const token = JSON.parse(jsontoken)
+  const [chat, setCat] = useState(false)
+
+  const [initData, setInitData] = useState(null)
 
   const [newGame, setNewGame] = useState(true)
 
@@ -42,8 +60,6 @@ const Game = ({ history }) => {
   const [mapData, setMapData] = useState(null)
 
   const [mapLandState, setMapLandState] = useState({ currentRoomId: 1 })
-
-  // const [currentRoom, setCurrentRoom] = useState({ title: "" })
 
   useEffect(() => {
     if (exitGame) {
@@ -69,6 +85,10 @@ const Game = ({ history }) => {
     // TODO:
   }
 
+  const handleInitData = initData => {
+    setInitData(initData)
+  }
+
   const handleExitGame = () => {
     axios
       .post(`https://wack-ass-game.herokuapp.com/api/logout/`)
@@ -76,6 +96,10 @@ const Game = ({ history }) => {
         localStorage.removeItem("mud_token")
         setExitGame(true)
       })
+  }
+
+  const chatToggle = () => {
+    setCat(!chat)
   }
 
   //Directional Control Handlers
@@ -107,45 +131,57 @@ const Game = ({ history }) => {
 
   return (
     <div>
-      <Grid container>
-        <Grid item xs={12}>
-          <GameNavBar
-            createNewGame={handleCreateNewGame}
-            exitGame={handleExitGame}
-          />
-        </Grid>
-
-        <Grid item xs={12}>
-          {possDirect && possDirect.currentTile && (
-            <Box className={classes.playerLocationDisplay}>
-              <img src={locationIcon} alt="location" />
-              <div style={{ flex: 1 }}>
-                You are in the {possDirect.currentTile.title} room
-              </div>
-              <div>Room #{possDirect.currentTile.room_id}</div>
-            </Box>
-          )}
-        </Grid>
-        <section className="section--game-container">
-          <div className="block--board">
-            <GameMapContainer
-              mapData={mapData}
-              mapLandState={mapLandState}
-              setMapLandState={setMapLandState}
-              possDirect={possDirect}
-              setPossDirect={setPossDirect}
-            />
-          </div>
-        </section>
-
-        <Grid item xs={12}>
-          <GameController
-            currentTile={possDirect.currentTile}
-            moveChar={moveChar}
-            speak={handleSpeak}
-          />
-        </Grid>
+      {/* <Grid container> */}
+      <Grid item xs={12}>
+        <GameNavBar
+          createNewGame={handleCreateNewGame}
+          exitGame={handleExitGame}
+        />
       </Grid>
+
+      <Grid item xs={12}>
+        {possDirect && possDirect.currentTile && (
+          <Box className={classes.playerLocationDisplay}>
+            <img src={locationIcon} alt="location" />
+            <div style={{ flex: 1 }}>
+              You are in the {possDirect.currentTile.title} room
+            </div>
+            <div>{possDirect.currentTile.description}</div>
+          </Box>
+        )}
+
+      </Grid>
+      {/* <Grid item xs={12}> */}
+      <div className="flex">
+        <div className={classes.gameBoard}>
+          <section className="section--game-container">
+            <div className="block--board">
+              <GameMapContainer
+                mapData={mapData}
+                mapLandState={mapLandState}
+                setMapLandState={setMapLandState}
+                possDirect={possDirect}
+                setPossDirect={setPossDirect}
+                handleInitData={handleInitData}
+              />
+            </div>
+          </section>
+        </div>
+        {/* <div className={classes.chat}> */}
+        <Chat chat={chat} />
+        {/* </div> */}
+      </div>
+      {/* </Grid> */}
+
+      {/* <Grid item xs={12}> */}
+      <GameController
+        currentTile={possDirect.currentTile}
+        moveChar={moveChar}
+        speak={handleSpeak}
+        chatToggle={chatToggle}
+        initData={initData}
+      />
+      {/* </Grid> */}
     </div>
   )
 }

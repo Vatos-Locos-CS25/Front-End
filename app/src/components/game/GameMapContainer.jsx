@@ -8,7 +8,8 @@ const GameMapContainer = ({
   mapLandState,
   setMapLandState,
   possDirect,
-  setPossDirect
+  setPossDirect,
+  handleInitData
 }) => {
 
   // console.log("mapData in gamemapcontainer --> ", mapData)
@@ -22,6 +23,7 @@ const GameMapContainer = ({
           setMapLandState={setMapLandState}
           possDirect={possDirect}
           setPossDirect={setPossDirect}
+          handleInitData={handleInitData}
         />
       ) : (
         <Loading />

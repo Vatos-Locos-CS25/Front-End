@@ -148,8 +148,8 @@ const Game = ({ history }) => {
           </Box>
         )}
       </Grid>
-      <Grid item xs={12}>
-        <div className={classes.gameBoardContainer}>
+      {/* <Grid item xs={12}> */}
+        <div className='flex'>
           <div className={classes.gameBoard}>
             <section className="section--game-container">
               <div className="block--board">
@@ -163,20 +163,20 @@ const Game = ({ history }) => {
               </div>
             </section>
           </div>
-          <div className={classes.chat}>
+          {/* <div className={classes.chat}> */}
             <Chat chat={chat} />
-          </div>
+          {/* </div> */}
         </div>
-      </Grid>
+      {/* </Grid> */}
 
-      <Grid item xs={12}>
+      {/* <Grid item xs={12}> */}
         <GameController
           currentTile={possDirect.currentTile}
           moveChar={moveChar}
           speak={handleSpeak}
           chatToggle={chatToggle}
         />
-      </Grid>
+      {/* </Grid> */}
     </div>
   )
 }

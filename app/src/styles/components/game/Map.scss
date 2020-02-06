@@ -6,23 +6,23 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 25px;
     border-radius: 10px;
     box-shadow: 3px 5px 10px -5px black, -3px 4px 15px -5px black;
     .main--map-tiles {
-        width: 320px;
-        height: 320px;
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        grid-template-rows: 1fr 1fr 1fr;
-        grid-gap: 5px;
+        width: 100%;
+        height: 500px;
+        // display: grid;
+        // grid-template-columns: 1fr 1fr 1fr;
+        // grid-template-rows: 1fr 1fr 1fr;
+        // grid-gap: 5px;
         background-color: $darkland;
         padding: 10px;
+        border-radius: 10px;
     }
     .block--game-controls {
         position: absolute;
         left: 0;
-        bottom: 0;
+        top: 0;
         font-size: 4.2rem;
         display: grid;
         grid-template-columns: repeat(2, 1fr);
@@ -37,14 +37,6 @@
             color: $ocean / 2;
         }
     }
-    .main--map-tiles-auto {
-        width: 80%;
-        display: grid;
-        grid-gap: 15px;
-        grid-template-columns: repeat(auto-fit, 100px);
-        background-color: $darkland;
-        padding: 10px;
-    }
 }
 
 
@@ -52,15 +44,19 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100px;
-    width: 100px;
+    height: 50px;
+    width: 50px;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
 }
 
 .block--tile_char {
     background-color: $grass;
-    border-radius: 100px;
+    border-radius: 50px;
+    transform: matrix(1, 0, 0, 1, 0, 0);
     .icon--char {
-        font-size: 6rem;
+        font-size: 3rem;
         color: $white;
     }
     .block--char-data {

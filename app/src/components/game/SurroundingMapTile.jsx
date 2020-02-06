@@ -1,38 +1,32 @@
 import React from 'react';
+import { useState } from "react";
+import { useEffect } from 'react';
 
 
 const SurroundingMapTile = props => {
     const { possDirect, lastTile, direction } = props;
+    console.log('possDirect , lastTile, direction --> ', possDirect, lastTile, direction);
+    const [ mapMatrix, setMapMatrix ] = useState({ x: 0, y: 0, display: true });
 
-    if (possDirect === "corner" || lastTile === "corner") {
-        return (
-            <div className="block--tile_corner"></div>
-        )
+    let mapTransform = {
+        transform: `translate(${mapMatrix.x}px, ${mapMatrix.y}px )`,
+        display: `${mapMatrix.display ? "flex" : "none"}`
     }
 
-    if (possDirect === lastTile) {
-        return (
-            <div className="block--tile_oldpath"></div>
-        )
-    }
+    useEffect(() => {
+        if (direction === "north" && possDirect !== 0) setMapMatrix({ ...mapMatrix, y: mapMatrix.y - 50, display: true })
+        else if (direction === "south" && possDirect !== 0) setMapMatrix({ ...mapMatrix, y: mapMatrix.y + 50, display: true })
+        else if (direction === "east" && possDirect !== 0) setMapMatrix({ ...mapMatrix, x: mapMatrix.x + 50, display: true })
+        else if (direction === "west" && possDirect !== 0) setMapMatrix({ ...mapMatrix, x: mapMatrix.x - 50, display: true })
+        else setMapMatrix({ ...mapMatrix, display: false })
+    }, [possDirect])
 
-    if (direction === "north") {
-        return (
-            <div className="block--tile_path"></div>
-        )
-    }
-    
     return (
         <>
-            {possDirect  !== 0  ?  (
-                <div className="block--tile_path"></div>
-            ) : (
-                <div className="block--tile_blocked"></div>
-            )}
+            <div className="block--tile_path" style={{...mapTransform}}>{direction}</div>
         </>
-    );
+    )
 }
 
 
 export default SurroundingMapTile;
-

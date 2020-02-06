@@ -11,7 +11,7 @@ const CharMapTile = props => {
             <GiGriffinSymbol className="icon--char" /> 
             <div className="block--char-data">{roomId}</div>
 
-            <div className="block--char-direct-container">
+            {/* <div className="block--char-direct-container">
                 {possDirect.currentTile.north && (
                     <MdExpandLess className="icon--char-direct north" />
                 )}
@@ -24,7 +24,7 @@ const CharMapTile = props => {
                 {possDirect.currentTile.east && (
                     <MdChevronRight className="icon--char-direct east" />
                 )}
-            </div>
+            </div> */}
 
         </div>
     );

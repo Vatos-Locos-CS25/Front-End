@@ -21,16 +21,16 @@ const useStyles = makeStyles(theme => ({
 const Chat = props => {
   const classes = useStyles()
   const [chat, setChat] = useState([
-    {id: 1, user: 'elan8', message: 'Elan\'s Message!'},
-    {id: 2, user: 'Riznis', message: 'Riznis\' Message!'},
-    {id: 1, user: 'elan8', message: 'Elan\'s Message!'},
-    {id: 2, user: 'Riznis', message: 'Riznis\' Message!'},
-    {id: 1, user: 'elan8', message: 'Elan\'s Message!'},
-    {id: 2, user: 'Riznis', message: 'Riznis\' Message!'},
-    {id: 1, user: 'elan8', message: 'Elan\'s Message!'},
-    {id: 2, user: 'Riznis', message: 'Riznis\' Message!'},
-    {id: 2, user: 'Riznis', message: 'Riznis\' Message!'},
-    {id: 2, user: 'Riznis', message: 'Riznis\' Message!'},
+    // {id: 1, user: 'elan8', message: 'Elan\'s Message!'},
+    // {id: 2, user: 'Riznis', message: 'Riznis\' Message!'},
+    // {id: 1, user: 'elan8', message: 'Elan\'s Message!'},
+    // {id: 2, user: 'Riznis', message: 'Riznis\' Message!'},
+    // {id: 1, user: 'elan8', message: 'Elan\'s Message!'},
+    // {id: 2, user: 'Riznis', message: 'Riznis\' Message!'},
+    // {id: 1, user: 'elan8', message: 'Elan\'s Message!'},
+    // {id: 2, user: 'Riznis', message: 'Riznis\' Message!'},
+    // {id: 2, user: 'Riznis', message: 'Riznis\' Message!'},
+    // {id: 2, user: 'Riznis', message: 'Riznis\' Message!'},
   ])
   const [message, setMessage] = useState("")
   const [user, setUser] = useState("")

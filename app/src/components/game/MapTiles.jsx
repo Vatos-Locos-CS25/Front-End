@@ -63,32 +63,14 @@ const MapTiles = props => {
             {possDirect && possDirect.lastTile && (
                 <>
                     <main className="main--map-tiles">
-        
-                        <StartTile  
+                        <StartTile  />
+
+                        <CharacterTile 
+                            currentTile={possDirect.currentTile}
+                            lastTile={possDirect.lastTile}
                             roomId={mapLandState.currentRoomId}  
                             possDirect={possDirect} 
                         />
-                        <CharacterTile 
-                            direction={"north"}
-                            possDirect={possDirect.currentTile.next_room_id_n}
-                            lastTile={possDirect.lastTile}
-                        />
-                        <CharacterTile 
-                            direction={"east"}
-                            possDirect={possDirect.currentTile.next_room_id_e}
-                            lastTile={possDirect.lastTile}
-                        />
-                        <CharacterTile 
-                            direction={"south"}
-                            possDirect={possDirect.currentTile.next_room_id_s}  
-                            lastTile={possDirect.lastTile}  
-                        />
-                        <CharacterTile 
-                            direction={"west"}
-                            possDirect={possDirect.currentTile.next_room_id_w}  
-                            lastTile={possDirect.lastTile}  
-                        />
-        
                     </main>
                 </>
             )}

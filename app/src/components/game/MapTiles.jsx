@@ -7,7 +7,7 @@ import axios from 'axios';
 
 
 const MapTiles = props => {
-    const { mapData, mapLandState, setMapLandState, possDirect, setPossDirect } = props;
+    const { mapData, mapLandState, setMapLandState, possDirect, setPossDirect, handleInitData } = props;
 
     const jsontoken = localStorage.getItem("mud_token");
     const token = JSON.parse(jsontoken);
@@ -43,6 +43,7 @@ const MapTiles = props => {
                 headers: { "Authorization": `Token ${token.key}` }
             })
             .then(response => {
+                handleInitData(response.data)
                 setMapLandState({ currentRoomId: response.data.room_id }) 
             })
             .catch(error => console.log("We have an init error", error))

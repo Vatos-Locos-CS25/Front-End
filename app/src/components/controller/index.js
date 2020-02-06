@@ -98,10 +98,7 @@ const GameController = ({ currentTile, initData, moveChar }) => {
         {/* <Grid item>Mini Map Placeholder</Grid> */}
         <Grid item>
           {initData && initData.players.length > 0 && (
-            <List
-              dense
-              subheader={<ListSubheader>Users</ListSubheader>}
-              className={classes.userList}>
+            <List dense className={classes.userList}>
               {initData.players.map((player, index) => (
                 <ListItem key={index}>
                   <ListItemIcon>

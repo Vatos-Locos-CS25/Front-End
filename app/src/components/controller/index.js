@@ -1,11 +1,21 @@
 import React from "react"
-import { AppBar, Button, Fab, Grid, Tooltip } from "@material-ui/core"
+import {
+  AppBar,
+  Button,
+  Fab,
+  Grid,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  ListSubheader
+} from "@material-ui/core"
 import { makeStyles } from "@material-ui/core/styles"
 import upArrow from "../../assets/images/up_arrow.png"
 import leftArrow from "../../assets/images/left_arrow.png"
 import rightArrow from "../../assets/images/right_arrow.png"
 import downArrow from "../../assets/images/down_arrow.png"
-import speakIcon from "../../assets/images/speak.png"
+import helmetIcon from "../../assets/images/knight.png"
 
 const useStyles = makeStyles(theme => ({
   controller: {
@@ -34,9 +44,13 @@ const useStyles = makeStyles(theme => ({
     margin: theme.spacing(1),
     backgroundColor: "#3C153B",
     color: "#FFFFFF"
+  },
+  userList: {
+    height: "100px",
+    overflow: "auto"
   }
 }))
-const GameController = ({ currentTile, moveChar, speak, chatToggle }) => {
+const GameController = ({ currentTile, initData, moveChar }) => {
   const classes = useStyles()
   return (
     <AppBar position="fixed" className={classes.controller}>
@@ -81,22 +95,23 @@ const GameController = ({ currentTile, moveChar, speak, chatToggle }) => {
             </Button>
           </div>
         </Grid>
-        <Grid item>Mini Map Placeholder</Grid>
+        {/* <Grid item>Mini Map Placeholder</Grid> */}
         <Grid item>
-          {/* <div
-            onClick={chatToggle}
-            style={{ display: "flex", flexDirection: "column" }}>
-            <Fab className={classes.actionButton} onClick={speak}>
-              <img src={speakIcon} alt="speak" />
-            </Fab>
-
-            <Fab
-              className={classes.actionButton}
-              onClick={action}
-              variant="extended">
-              <img src={actionIcon} alt="action" />
-            </Fab>
-          </div> */}
+          {initData && initData.players.length > 0 && (
+            <List
+              dense
+              subheader={<ListSubheader>Users</ListSubheader>}
+              className={classes.userList}>
+              {initData.players.map((player, index) => (
+                <ListItem key={index}>
+                  <ListItemIcon>
+                    <img src={helmetIcon} alt="helmet" />
+                  </ListItemIcon>
+                  <ListItemText>{player}</ListItemText>
+                </ListItem>
+              ))}
+            </List>
+          )}
         </Grid>
       </Grid>
     </AppBar>

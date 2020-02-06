@@ -10,7 +10,8 @@ const GameMapContainer = ({
   mapLandState,
   setMapLandState,
   possDirect,
-  setPossDirect
+  setPossDirect,
+  handleInitData
 }) => {
   //const [mapData, setMapData] = useState(null)
 
@@ -39,6 +40,7 @@ const GameMapContainer = ({
           setMapLandState={setMapLandState}
           possDirect={possDirect}
           setPossDirect={setPossDirect}
+          handleInitData={handleInitData}
         />
       ) : (
         <Loading />

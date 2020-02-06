@@ -44,6 +44,8 @@ const Game = ({ history }) => {
   const token = JSON.parse(jsontoken)
   const [chat, setCat] = useState(false)
 
+  const [initData, setInitData] = useState(null)
+
   const [newGame, setNewGame] = useState(true)
 
   const [exitGame, setExitGame] = useState(false)
@@ -85,6 +87,10 @@ const Game = ({ history }) => {
 
   const handleCreateNewGame = () => {
     // TODO:
+  }
+
+  const handleInitData = initData => {
+    setInitData(initData)
   }
 
   const handleExitGame = () => {
@@ -149,33 +155,35 @@ const Game = ({ history }) => {
         )}
       </Grid>
       {/* <Grid item xs={12}> */}
-        <div className='flex'>
-          <div className={classes.gameBoard}>
-            <section className="section--game-container">
-              <div className="block--board">
-                <GameMapContainer
-                  mapData={mapData}
-                  mapLandState={mapLandState}
-                  setMapLandState={setMapLandState}
-                  possDirect={possDirect}
-                  setPossDirect={setPossDirect}
-                />
-              </div>
-            </section>
-          </div>
-          {/* <div className={classes.chat}> */}
-            <Chat chat={chat} />
-          {/* </div> */}
+      <div className="flex">
+        <div className={classes.gameBoard}>
+          <section className="section--game-container">
+            <div className="block--board">
+              <GameMapContainer
+                mapData={mapData}
+                mapLandState={mapLandState}
+                setMapLandState={setMapLandState}
+                possDirect={possDirect}
+                setPossDirect={setPossDirect}
+                handleInitData={handleInitData}
+              />
+            </div>
+          </section>
         </div>
+        {/* <div className={classes.chat}> */}
+        <Chat chat={chat} />
+        {/* </div> */}
+      </div>
       {/* </Grid> */}
 
       {/* <Grid item xs={12}> */}
-        <GameController
-          currentTile={possDirect.currentTile}
-          moveChar={moveChar}
-          speak={handleSpeak}
-          chatToggle={chatToggle}
-        />
+      <GameController
+        currentTile={possDirect.currentTile}
+        moveChar={moveChar}
+        speak={handleSpeak}
+        chatToggle={chatToggle}
+        initData={initData}
+      />
       {/* </Grid> */}
     </div>
   )
